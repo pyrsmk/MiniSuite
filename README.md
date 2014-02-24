@@ -1,4 +1,4 @@
-MiniSuite 1.0.2
+MiniSuite 1.0.3
 ===============
 
 MiniSuite is an very small and flexible unit testing tool.
