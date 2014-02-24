@@ -14,7 +14,7 @@ You can download the class files (located in `src/`) or install MiniSuite with [
 ```json
 {
     "require": {
-        "pyrsmk/minisuite": "1.*"
+        "pyrsmk/minisuite": "1.0.*"
     }
 }
 ```
