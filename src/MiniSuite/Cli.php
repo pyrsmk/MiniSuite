@@ -32,7 +32,7 @@ class Cli extends MiniSuite{
 		Triggered before running tests
 	*/
 	protected function _beforeTests(){
-		if($colors){
+		if($this->colors){
 			echo "\n  \033[1;33m$this->name\n\n";
 		}
 		else{
@@ -54,7 +54,7 @@ class Cli extends MiniSuite{
 			string $message
 	*/
 	protected function _testPassed($message){
-		if($colors){
+		if($this->colors){
 			echo "      \033[0;32m$message\n";
 		}
 		else{
@@ -69,7 +69,7 @@ class Cli extends MiniSuite{
 			string $message
 	*/
 	protected function _testFailed($message){
-		if($colors){
+		if($this->colors){
 			echo "      \033[0;31m$message\n";
 		}
 		else{
