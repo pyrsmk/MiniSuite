@@ -7,7 +7,7 @@
 		"name": "Aurélien Delogu",
 		"email": "dev@dreamysource.fr",
 		"homepage": "http://dreamysource.fr"
-	}]
+	}],
 	"require": {
 		"php": ">=5.3.0"
 	},
