@@ -17,7 +17,7 @@ class Http extends MiniSuite{
 		Triggered before running tests
 	*/
 	protected function _beforeTests(){
-		echo "<h1>".$this->_name."</h1><ul>";
+		echo "<h1>".$this->name."</h1><ul>";
 	}
 
 	/*

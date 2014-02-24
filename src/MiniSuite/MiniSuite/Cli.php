@@ -16,7 +16,7 @@ class Cli extends MiniSuite{
 		Triggered before running tests
 	*/
 	protected function _beforeTests(){
-		echo "\n  \033[1;33m".$this->_name."\n\n";
+		echo "\n  \033[1;33m".$this->name."\n\n";
 	}
 
 	/*
@@ -33,7 +33,7 @@ class Cli extends MiniSuite{
 			string $message
 	*/
 	protected function _testPassed($message){
-		echo "      \033[0;32m$message\n";
+		echo "      \033[0;32mPassed : $message\n";
 	}
 
 	/*
@@ -43,7 +43,7 @@ class Cli extends MiniSuite{
 			string $message
 	*/
 	protected function _testFailed($message){
-		echo "      \033[0;31m$message\n";
+		echo "      \033[0;31mFailed : $message\n";
 	}
 
 }
