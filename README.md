@@ -1,7 +1,7 @@
 MiniSuite 1.0.0
 ===============
 
-MiniSuite is an very small and flexible unit testing suite.
+MiniSuite is an very small and flexible unit testing tool.
 Nothing to learn about.
 Beautiful reports.
 No headaches.

@@ -1,7 +1,7 @@
 {
 	"name": "pyrsmk/minisuite",
-	"description": "A mini unit testing suite",
-	"keywords": ["unit","testing","framework"],
+	"description": "A mini unit testing tool",
+	"keywords": ["unit","testing"],
 	"license": "MIT",
 	"authors": [{
 		"name": "Aurélien Delogu",

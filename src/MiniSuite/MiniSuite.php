@@ -1,7 +1,7 @@
 <?php
 
 /*
-	A mini unit testing suite
+	A mini unit testing tool
 
 	Author
 		Aurélien Delogu (dev@dreamysource.fr)
