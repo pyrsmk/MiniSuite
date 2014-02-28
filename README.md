@@ -1,7 +1,7 @@
 MiniSuite 1.0.8
 ===============
 
-MiniSuite is an very small and flexible unit testing tool.
+MiniSuite is a very concise and flexible unit testing tool.
 Nothing to learn about.
 Beautiful reports.
 No headaches.
@@ -57,6 +57,15 @@ $minisuite->run();
 ```
 
 And launch your PHP test file in the command line interface or your browser.
+
+ANSI colors
+===========
+
+By default, MiniSuite uses ANSI colors to display beautiful CLI reports. But Windows does not support them natively. To disable those colors and have a boring, but not crappy, report :
+
+```php
+$minisuite->disableAnsiColors();
+```
 
 License
 -------
