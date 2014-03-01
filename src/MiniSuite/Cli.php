@@ -13,6 +13,11 @@ use MiniSuite;
 class Cli extends MiniSuite{
 
 	/*
+		integer $tabs
+	*/
+	protected $tabs=1;
+
+	/*
 		boolean $colors
 	*/
 	protected $colors=true;
@@ -30,21 +35,52 @@ class Cli extends MiniSuite{
 
 	/*
 		Triggered before running tests
+		
+		Parameters
+			string $message
 	*/
-	protected function _beforeTests(){
+	protected function _beforeTests($message){
 		if($this->colors){
-			echo "\n  \033[1;33m$this->name\n\n";
+			echo "\n".str_repeat('  ',$this->tabs)."\033[1;33m$message\n\n";
 		}
 		else{
-			echo "\n  $this->name\n\n";
+			echo "\n".str_repeat('  ',$this->tabs)."$message\n\n";
 		}
 	}
 
 	/*
 		Triggered after running tests
+		
+		Parameters
+			string $message
 	*/
-	protected function _afterTests(){
+	protected function _afterTests($message){
 		echo "\n";
+	}
+
+	/*
+		Triggered when opening a group
+		
+		Parameters
+			string $message
+	*/
+	protected function _openGroup($message){
+		if($this->colors){
+			echo "\n".str_repeat('  ',++$this->tabs)."\033[1;35m$message\n";
+		}
+		else{
+			echo "\n".str_repeat('  ',++$this->tabs)."$message\n";
+		}
+	}
+
+	/*
+		Triggered when closing a group
+		
+		Parameters
+			string $message
+	*/
+	protected function _closeGroup($message){
+		--$this->tabs;
 	}
 
 	/*
@@ -55,10 +91,10 @@ class Cli extends MiniSuite{
 	*/
 	protected function _testPassed($message){
 		if($this->colors){
-			echo "      \033[0;32m$message\n";
+			echo str_repeat('  ',$this->tabs+1)."\033[0;32m$message\n";
 		}
 		else{
-			echo "      Passed : $message\n";
+			echo str_repeat('  ',$this->tabs+1)."Passed : $message\n";
 		}
 	}
 
@@ -70,10 +106,10 @@ class Cli extends MiniSuite{
 	*/
 	protected function _testFailed($message){
 		if($this->colors){
-			echo "      \033[0;31m$message\n";
+			echo str_repeat('  ',$this->tabs+1)."\033[0;31m$message\n";
 		}
 		else{
-			echo "      Failed : $message\n";
+			echo str_repeat('  ',$this->tabs+1)."Failed : $message\n";
 		}
 	}
 

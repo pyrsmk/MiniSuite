@@ -14,17 +14,56 @@ use MiniSuite;
 class Http extends MiniSuite{
 
 	/*
-		Triggered before running tests
+		integer $tabs
 	*/
-	protected function _beforeTests(){
-		echo "<h1>".$this->name."</h1><ul>";
+	protected $tabs=1;
+
+	/*
+		Triggered before running tests
+		
+		Parameters
+			string $message
+	*/
+	protected function _beforeTests($message){
+		echo '<!DOCTYPE html>
+		<html>
+			<head>
+				<title>'.$message.'</title>
+				<meta charset="utf-8">
+			</head>
+	  		<body>
+	  			<h1>'.$message.'</h1>
+	  			<ul style="margin:0;padding:0;list-style-type:none;">';
 	}
 
 	/*
 		Triggered after running tests
+		
+		Parameters
+			string $message
 	*/
-	protected function _afterTests(){
-		echo '</ul>';
+	protected function _afterTests($message){
+		echo '</ul></body></html>';
+	}
+
+	/*
+		Triggered when opening a group
+		
+		Parameters
+			string $message
+	*/
+	protected function _openGroup($message){
+		echo '<li style="padding-top:1em;padding-left:'.(++$this->tabs).'em;">'.$message.'</li>';
+	}
+
+	/*
+		Triggered when closing a group
+		
+		Parameters
+			string $message
+	*/
+	protected function _closeGroup($message){
+		--$this->tabs;
 	}
 
 	/*
@@ -34,7 +73,7 @@ class Http extends MiniSuite{
 			string $message
 	*/
 	protected function _testPassed($message){
-		echo '<li style="color:green;">'.$message.'</li>';
+		echo '<li style="padding-left:'.($this->tabs+1).'em;color:green;">'.$message.'</li>';
 	}
 
 	/*
@@ -44,7 +83,7 @@ class Http extends MiniSuite{
 			string $message
 	*/
 	protected function _testFailed($message){
-		echo '<li style="color:red;">'.$message.'</li>';
+		echo '<li style="padding-left:'.($this->tabs+1).'em;color:red;">'.$message.'</li>';
 	}
 
 }
