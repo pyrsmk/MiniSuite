@@ -1,4 +1,4 @@
-MiniSuite 1.1.0
+MiniSuite 1.2.0
 ===============
 
 MiniSuite is a very concise and flexible unit testing tool.
@@ -44,7 +44,7 @@ Run your tests
 The `test()` method can accept any `callable`. If an exception occurs during the test, MiniSuite will quietly handle it and simply fails the test. Here's how to make a test :
 
 ```php
-$minisuite->test('I have 3 fruits in my basket',function(){
+$minisuite->test('I have 3 fruits in my basket',function($minisuite){
     $fruits=array('apple','peach','strawberry');
     return count($fruits)==3;
 });
@@ -77,15 +77,15 @@ $minisuite=new MiniSuite\Cli('My Test Suite');
 $minisuite->disableAnsiColors();
 
 $minisuite->group('Group some tests',function($minisuite){
-    $minisuite->test('I have 3 fruits in my basket',function(){
+    $minisuite->test('I have 3 fruits in my basket',function($minisuite){
         $fruits=array('apple','peach','strawberry');
         return count($fruits)==3;
     });
-    $minisuite->test('And 5 vegetables',function(){
+    $minisuite->test('And 5 vegetables',function($minisuite){
         $vegetables=array('celery','potato','cabbage','endive','radicchio');
         return count($vegetables)==5;
     });
-    $minisuite->test('And 15 candies',function(){
+    $minisuite->test('And 15 candies',function($minisuite){
         $candies=array();
         return count($candies)==15;
     });
@@ -103,6 +103,24 @@ My Test Suite
 ```
 
 Note that group nesting is supported.
+
+Print additional messages
+-------------------------
+
+If needed, you can display useful messages with `info()` and `error()` methods :
+
+```
+$minisuite->test('Some test',function($minisuite){
+    try{
+        $minisuite->info('Will print an info');
+        return true;
+    }
+    catch(\Exception $e){
+        $minisuite->error('Will print an error');
+        return false;
+    }
+});
+```
 
 Write your own report objects
 -----------------------------

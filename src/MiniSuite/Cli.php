@@ -112,5 +112,35 @@ class Cli extends MiniSuite{
 			echo str_repeat('  ',$this->tabs+1)."Failed : $message\n";
 		}
 	}
+	
+	/*
+		Print an info message
+		
+		Parameters
+			string $message
+	*/
+	protected function _printInfo($message){
+		if($this->colors){
+			echo str_repeat('  ',$this->tabs+1)."\033[0;36m$message\n";
+		}
+		else{
+			echo str_repeat('  ',$this->tabs+1)."$message\n";
+		}
+	}
+	
+	/*
+		Print an error message
+		
+		Parameters
+			string $message
+	*/
+	protected function _printError($message){
+		if($this->colors){
+			echo str_repeat('  ',$this->tabs+1)."\033[0;31m$message\n";
+		}
+		else{
+			echo str_repeat('  ',$this->tabs+1)."$message\n";
+		}
+	}
 
 }

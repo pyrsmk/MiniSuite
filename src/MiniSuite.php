@@ -72,6 +72,34 @@ abstract class MiniSuite{
 		);
 		return $this;
 	}
+
+	/*
+		Print an info message
+
+		Parameters
+			string $message
+
+		Return
+			MiniSuite
+	*/
+	final public function info($message){
+		$this->_printInfo($message);
+		return $this;
+	}
+
+	/*
+		Print an error message
+
+		Parameters
+			string $message
+
+		Return
+			MiniSuite
+	*/
+	final public function error($message){
+		$this->_printError($message);
+		return $this;
+	}
 	
 	/*
 		Run the tests
@@ -85,7 +113,7 @@ abstract class MiniSuite{
 			try{
 				switch($element['type']){
 					case 'test':
-						if($element['callable']()){
+						if($element['callable']($this)){
 							$this->_testPassed($element['message']);
 						}
 						else{
@@ -155,5 +183,21 @@ abstract class MiniSuite{
 			string $message
 	*/
 	abstract protected function _testFailed($message);
+	
+	/*
+		Print an info message
+		
+		Parameters
+			string $message
+	*/
+	abstract protected function _printInfo($message);
+	
+	/*
+		Print an error message
+		
+		Parameters
+			string $message
+	*/
+	abstract protected function _printError($message);
 	
 }

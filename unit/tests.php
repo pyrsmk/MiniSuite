@@ -18,21 +18,23 @@ else{
 
 ########################################################### Base
 
-$minisuite->test('Should pass',function(){
+$minisuite->test('Should pass',function($minisuite){
+	$minisuite->info('Should be an info message');
 	return true;
 });
 
-$minisuite->test('Should fail',function(){
+$minisuite->test('Should fail',function($minisuite){
+	$minisuite->info('Should be an error message');
 	return false;
 });
 
 ########################################################### Group
 
 $minisuite->group('Group - level 1',function($minisuite){
-	$minisuite->test('Should pass',function(){
+	$minisuite->test('Should pass',function($minisuite){
 		return true;
 	});
-	$minisuite->test('Should fail',function(){
+	$minisuite->test('Should fail',function($minisuite){
 		return false;
 	});
 });
@@ -40,26 +42,26 @@ $minisuite->group('Group - level 1',function($minisuite){
 ########################################################### Nested groups
 
 $minisuite->group('Group - level 1',function($minisuite){
-	$minisuite->test('Should pass',function(){
+	$minisuite->test('Should pass',function($minisuite){
 		return true;
 	});
 	$minisuite->group('Group - level 2',function($minisuite){
-		$minisuite->test('Should pass',function(){
+		$minisuite->test('Should pass',function($minisuite){
 			return true;
 		});
-		$minisuite->test('Should fail',function(){
+		$minisuite->test('Should fail',function($minisuite){
 			return false;
 		});
 		$minisuite->group('Group - level 3',function($minisuite){
-			$minisuite->test('Should pass',function(){
+			$minisuite->test('Should pass',function($minisuite){
 				return true;
 			});
-			$minisuite->test('Should fail',function(){
+			$minisuite->test('Should fail',function($minisuite){
 				return false;
 			});
 		});
 	});
-	$minisuite->test('Should fail',function(){
+	$minisuite->test('Should fail',function($minisuite){
 		return false;
 	});
 });

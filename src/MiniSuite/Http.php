@@ -73,7 +73,7 @@ class Http extends MiniSuite{
 			string $message
 	*/
 	protected function _testPassed($message){
-		echo '<li style="padding-left:'.($this->tabs+1).'em;color:green;">'.$message.'</li>';
+		echo '<li style="padding-left:'.($this->tabs+1).'em;color:seagreen;">'.$message.'</li>';
 	}
 
 	/*
@@ -83,7 +83,27 @@ class Http extends MiniSuite{
 			string $message
 	*/
 	protected function _testFailed($message){
-		echo '<li style="padding-left:'.($this->tabs+1).'em;color:red;">'.$message.'</li>';
+		echo '<li style="padding-left:'.($this->tabs+1).'em;color:tomato;">'.$message.'</li>';
+	}
+	
+	/*
+		Print an info message
+		
+		Parameters
+			string $message
+	*/
+	protected function _printInfo($message){
+		echo '<li style="padding-left:'.($this->tabs+1).'em;color:steelblue;">'.$message.'</li>';
+	}
+	
+	/*
+		Print an error message
+		
+		Parameters
+			string $message
+	*/
+	protected function _printError($message){
+		echo '<li style="padding-left:'.($this->tabs+1).'em;color:tomato;">'.$message.'</li>';
 	}
 
 }
