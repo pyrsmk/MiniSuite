@@ -3,7 +3,7 @@ MiniSuite 1.2.0
 
 MiniSuite is a very concise and flexible unit testing tool.
 Nothing to learn about.
-Beautiful reports.
+Nice reports.
 No headaches.
 
 Installing
@@ -14,13 +14,9 @@ You can download the class files (located in `src/`) or install MiniSuite with [
 ```json
 {
     "require": {
-        "pyrsmk/minisuite": "1.*"
+        "pyrsmk/minisuite": "1.2.*"
     }
 }
-```
-
-```shell
-composer install
 ```
 
 Contexts
