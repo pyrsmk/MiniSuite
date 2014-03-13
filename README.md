@@ -121,7 +121,7 @@ $minisuite->test('Some test',function($minisuite){
 Write your own report objects
 -----------------------------
 
-Writing your own objects to have another report for another context, or to beautify an existing report, is pretty simple. We encourage you to take a look at `MiniSuite\Cli` and `MiniSuite\Http` classes to quickly how it works.
+Writing your own objects to have another report for another context, or to beautify an existing report, is pretty simple. We encourage you to take a look at `MiniSuite\Cli` and `MiniSuite\Http` classes to quickly see how it works.
 
 License
 -------
