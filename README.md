@@ -57,7 +57,7 @@ And launch your PHP test file in the command line interface or your browser.
 ANSI colors
 -----------
 
-By default, MiniSuite uses ANSI colors to display beautiful CLI reports. But Windows does not support them natively. To disable those colors and have a boring, but not crappy, report :
+By default, MiniSuite uses ANSI colors to display beautiful CLI reports. But Windows does not support them natively. Disable those colors and have a boring report by :
 
 ```php
 $minisuite->disableAnsiColors();
@@ -90,12 +90,12 @@ $minisuite->group('Group some tests',function($minisuite){
 
 Will print :
 
-```shell
+```
 My Test Suite
-        Group some tests
-                Passed : I have 3 fruits in my basket
-                Passed : And 5 vegetables
-                Failed : And 15 candies
+    Group some tests
+        Passed : I have 3 fruits in my basket
+        Passed : And 5 vegetables
+        Failed : And 15 candies
 ```
 
 Note that group nesting is supported.
@@ -105,7 +105,7 @@ Print additional messages
 
 If needed, you can display useful messages with `info()` and `error()` methods :
 
-```
+```php
 $minisuite->test('Some test',function($minisuite){
     try{
         $minisuite->info('Will print an info');
