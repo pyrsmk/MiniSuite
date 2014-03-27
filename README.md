@@ -126,4 +126,4 @@ Writing your own objects to have another report for another context, or to beaut
 License
 -------
 
-MiniSuite is released under the MIT license.
+MiniSuite is released under the [MIT license](http://dreamysource.mit-license.org).
