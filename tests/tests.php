@@ -1,71 +1,44 @@
 <?php
 
+use Symfony\Component\Finder\Finder;
+
 ########################################################### Prepare
 
 error_reporting(E_ALL);
 
-require __DIR__.'/../src/MiniSuite.php';
-require __DIR__.'/../src/MiniSuite/Cli.php';
-require __DIR__.'/../src/MiniSuite/Http.php';
+require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
-if(PHP_SAPI=='cli'){
-	$minisuite=new MiniSuite\Cli('MiniSuite');
-	$minisuite->disableAnsiColors();
+$finder=new Finder();
+$finder->files()->in('../src');
+foreach($finder as $file){
+	require_once $file->getRealpath();
 }
-else{
-	$minisuite=new MiniSuite\Http('MiniSuite');
-}
+
+$minisuite=new MiniSuite('MiniSuite');
 
 ########################################################### Base
 
-$minisuite->test('Should pass',function($minisuite){
-	$minisuite->info('Should be an info message');
-	return true;
-});
+$minisuite->expects('Should pass')->that(true)->equals(true);
+$minisuite->expects('Should fail')->that(true)->equals(false);
 
-$minisuite->test('Should fail',function($minisuite){
-	$minisuite->info('Should be an error message');
-	return false;
-});
+########################################################### Levels consistency
 
-########################################################### Group
+$a=0;
 
-$minisuite->group('Group - level 1',function($minisuite){
-	$minisuite->test('Should pass',function($minisuite){
-		return true;
+$minisuite->group('Levels consistency',function($minisuite) use(&$a){
+	$minisuite->group('Level 1',function($minisuite) use(&$a){
+		$minisuite->expects('Level 1-1')->that(++$a)->equals(1);
+		$minisuite->expects('Level 1-2')->that(++$a)->equals(2);
 	});
-	$minisuite->test('Should fail',function($minisuite){
-		return false;
-	});
-});
-
-########################################################### Nested groups
-
-$minisuite->group('Group - level 1',function($minisuite){
-	$minisuite->test('Should pass',function($minisuite){
-		return true;
-	});
-	$minisuite->group('Group - level 2',function($minisuite){
-		$minisuite->test('Should pass',function($minisuite){
-			return true;
-		});
-		$minisuite->test('Should fail',function($minisuite){
-			return false;
-		});
-		$minisuite->group('Group - level 3',function($minisuite){
-			$minisuite->test('Should pass',function($minisuite){
-				return true;
-			});
-			$minisuite->test('Should fail',function($minisuite){
-				return false;
-			});
+	$minisuite->expects('Level 2')->that(++$a)->equals(3);
+	$minisuite->group('Level 3',function($minisuite) use(&$a){
+		$minisuite->expects('Level 3-1')->that(++$a)->equals(4);
+		$minisuite->expects('Level 3-2')->that(++$a)->equals(5);
+		$minisuite->group('Level 3-3',function($minisuite) use(&$a){
+			$minisuite->expects('Level 3-3-1')->that(++$a)->equals(6);
+			$minisuite->expects('Level 3-3-2')->that(++$a)->equals(7);
 		});
 	});
-	$minisuite->test('Should fail',function($minisuite){
-		return false;
-	});
+	$minisuite->expects('Level 4')->that(++$a)->equals(8);
 });
-
-########################################################### Run tests
-
-$minisuite->run();
