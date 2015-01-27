@@ -65,7 +65,10 @@ abstract class MiniSuite{
 			'type'		=> 'group-open',
 			'message' 	=> (string)$message
 		);
-		$callable($this);
+		$this->stack[]=array(
+			'type'		=> 'group',
+			'callable'	=> $callable
+		);
 		$this->stack[]=array(
 			'type'		=> 'group-close',
 			'message' 	=> (string)$message
@@ -122,6 +125,9 @@ abstract class MiniSuite{
 						break;
 					case 'group-open':
 						$this->_openGroup($element['message']);
+						break;
+					case 'group':
+						$element['callable']($this);
 						break;
 					case 'group-close':
 						$this->_closeGroup($element['message']);
