@@ -3,18 +3,16 @@
 namespace MiniSuite;
 
 /*
-	Nunzion\Expect wrapper
+	Expect object
 */
 class Expect{
 	
 	/*
 		Closure $passed
 		Closure $failed
-		Nunzion\Expect $expect
 	*/
 	protected $passed;
 	protected $failed;
-	protected $expect;
 
 	/*
 		Constructor
@@ -29,43 +27,22 @@ class Expect{
 	}
 
 	/*
-		Wrap that() method
+		Define the value to check
 
 		Parameters
 			mixed $value
+			integer, string $index
 
 		Return
-			MiniSuite\Expect
+			MiniSuite\That
 	*/
-	public function that($value){
-		$this->expect=\Nunzion\Expect::that($value);
-		return $this;
-	}
-
-	/*
-		Call an assertion
-
-		Parameters
-			string $name
-			array $arguments
-
-		Return
-			MiniSuite\Expect
-	*/
-	public function __call($name,$arguments){
-		if(!method_exists($this->expect,$name)){
-			throw new \Exception("Unsupported '$name' assertion");
+	public function that($value,$index=null){
+		if($index===null){
+			return new That($this->passed,$this->failed,$value);
 		}
-		try{
-			$this->expect=call_user_func_array(array($this->expect,$name),$arguments);
-			$passed=$this->passed;
-			$passed();
+		else{
+			return new ThatElement($this->passed,$this->failed,$value,$index);
 		}
-		catch(\Exception $e){
-			$failed=$this->failed;
-			$failed($e);
-		}
-		return $this;
 	}
 
 

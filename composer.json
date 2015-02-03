@@ -1,6 +1,6 @@
 {
 	"name": "pyrsmk/minisuite",
-	"description": "A mini unit testing tool",
+	"description": "A micro unit testing tool",
 	"keywords": ["unit","testing"],
 	"license": "MIT",
 	"authors": [{
@@ -9,8 +9,7 @@
 		"homepage": "http://dreamysource.fr"
 	}],
 	"require": {
-		"php": ">=5.4.0",
-		"nunzion/php-expect": "~1.0"
+		"php": ">=5.4.0"
 	},
 	"autoload": {
 		"psr-0" : {

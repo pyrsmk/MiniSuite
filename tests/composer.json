@@ -1,5 +1,5 @@
 {
 	"require": {
-		"symfony/finder": "2.7.*@dev"
+		"symfony/class-loader": "2.7.*@dev"
 	}
 }

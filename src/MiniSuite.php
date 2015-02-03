@@ -51,11 +51,14 @@ class MiniSuite{
 			MiniSuite
 	*/
 	public function expects($message){
-		return new MiniSuite\Expect(function() use($message){
-			echo str_repeat('  ',$this->level+1)."Passed : $message\n";
-		},function($e) use($message){
-			echo str_repeat('  ',$this->level+1)."Failed : $message (".$e->getMessage().")\n";
-		});
+		return new MiniSuite\Expect(
+			function() use($message){
+				echo str_repeat('  ',$this->level+1)."Passed : $message\n";
+			},
+			function($err) use($message){
+				echo str_repeat('  ',$this->level+1)."Failed : $message ($err)\n";
+			}
+		);
 	}
 	
 }
