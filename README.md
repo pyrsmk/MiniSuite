@@ -6,14 +6,10 @@ MiniSuite is a very concise and flexible unit testing tool which aims to have an
 Installing
 ----------
 
-You can download the class files (located in `src/`) or install MiniSuite with [Composer](https://getcomposer.org/) :
+Pick up the source or install it with [Composer](https://getcomposer.org/) :
 
 ```json
-{
-    "require": {
-        "pyrsmk/minisuite": "~2.1"
-    }
-}
+composer require pyrsmk/minisuite
 ```
 
 Write your tests
