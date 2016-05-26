@@ -1,4 +1,4 @@
-MiniSuite 2.1.2
+MiniSuite 2.1.3
 ===============
 
 MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive/powerful API with a small learning curve.
@@ -8,7 +8,7 @@ Installing
 
 Pick up the source or install it with [Composer](https://getcomposer.org/) :
 
-```json
+```
 composer require pyrsmk/minisuite
 ```
 
