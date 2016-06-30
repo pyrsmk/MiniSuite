@@ -1,7 +1,9 @@
-MiniSuite 2.1.3
+MiniSuite 3.0.0
 ===============
 
 MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive API with a small learning curve.
+
+Support for colors has been added with [colors.php](https://github.com/kevinlebrun/colors.php).
 
 Installing
 ----------
@@ -20,7 +22,7 @@ MiniSuite does not need you to create a class for each test you want to run, you
 ```php
 $fruits = array('apple', 'peach', 'strawberry');
 
-$minisuite = new MiniSuite('My tests');
+$minisuite = new MiniSuite\Suite('My tests');
 $minisuite->expects('I have 3 fruits in my basket') // define the expectation message
           ->that(count($fruits))                    // define the value to verify
           ->equals(3);                              // 'equals' expectation
@@ -56,7 +58,7 @@ Grouping
 For a better test report, it could be a good idea to group your tests.
 
 ```php
-$minisuite = new MiniSuite('My Test Suite');
+$minisuite = new MiniSuite\Suite('My Test Suite');
 
 $minisuite->group('Group some tests', function($minisuite) {
 
