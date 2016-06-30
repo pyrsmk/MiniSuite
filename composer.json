@@ -9,12 +9,11 @@
 		"homepage": "http://dreamysource.io/project/minisuite"
 	}],
 	"require": {
-		"php": ">=5.4.0",
-		"kevinlebrun/colors.php": "^1.0"
+		"php": ">=5.4.0"
 	},
 	"autoload": {
 		"psr-4" : {
-			"MiniSuite" : "src/"
+			"MiniSuite\\" : "src/"
 		}
 	}
 }
