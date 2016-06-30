@@ -2,6 +2,8 @@
 
 namespace MiniSuite;
 
+use Colors\Color;
+
 /*
 	Base suite class
 */
@@ -32,7 +34,7 @@ class Suite {
 			callable $callable
 
 		Return
-			MiniSuite
+			MiniSuite\Suite
 	*/
 	public function group($message, $callable) {
 		if(!is_callable($callable)) {
@@ -50,15 +52,17 @@ class Suite {
 		Run a test
 		
 		Return
-			MiniSuite
+			MiniSuite\Suite
 	*/
 	public function expects($message) {
-		return new MiniSuite\Expect(
-			function() use($message) {
-				echo str_repeat('  ', $this->level + 1)."Passed : $message\n";
+		$color = new Color();
+		
+		return new Expect(
+			function() use($message, $color) {
+				echo str_repeat('  ', $this->level + 1).$color("OK : $message\n")->green();
 			},
-			function($err) use($message) {
-				echo str_repeat('  ', $this->level + 1)."Failed : $message ($err)\n";
+			function($err) use($message, $color) {
+				echo str_repeat('  ', $this->level + 1).$color("!! : $message ($err)\n")->red();
 			}
 		);
 	}
