@@ -1,7 +1,7 @@
 MiniSuite 2.1.3
 ===============
 
-MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive/powerful API with a small learning curve.
+MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive API with a small learning curve.
 
 Installing
 ----------
@@ -15,21 +15,21 @@ composer require pyrsmk/minisuite
 Write your tests
 ----------------
 
-MiniSuite does not need you to create a class for each test you want to run, you can write and organize your code as you want. Please note that all tests are runned at call.
+MiniSuite does not need you to create a class for each test you want to run, you can write and organize your code as you want. Please note that all tests are runned when they're called.
 
 ```php
-$fruits=array('apple','peach','strawberry');
+$fruits = array('apple', 'peach', 'strawberry');
 
-$minisuite=new MiniSuite('My tests');
+$minisuite = new MiniSuite('My tests');
 $minisuite->expects('I have 3 fruits in my basket') // define the expectation message
-          ->that(count($fruits))                    // define the value too verify
-          ->equals(3);                              // equals expectation
+          ->that(count($fruits))                    // define the value to verify
+          ->equals(3);                              // 'equals' expectation
 ```
 
-You also chain your expectations :
+You can also chain your expectations :
 
 ```php
-$some_value=72;
+$some_value = 72;
 
 $minisuite->expects('Some message')
           ->that($some_value)
@@ -41,10 +41,10 @@ $minisuite->expects('Some message')
 Specific tests on array elements are supported too :
 
 ```php
-$fruits=array('apples'=>12,'peaches'=>7,'strawberries'=>41);
+$fruits = array('apples' => 12, 'peaches' => 7, 'strawberries' => 41);
 
 $minisuite->expects('Verify strawberries stock')
-          ->that($fruits,'strawberries')
+          ->that($fruits, 'strawberries')
           ->isDefined()
           ->isInteger()
           ->isGreaterThan(0);
@@ -53,16 +53,16 @@ $minisuite->expects('Verify strawberries stock')
 Grouping
 --------
 
-For a better test report, it should be a good idea to group your tests.
+For a better test report, it could be a good idea to group your tests.
 
 ```php
-$minisuite=new MiniSuite('My Test Suite');
+$minisuite = new MiniSuite('My Test Suite');
 
-$minisuite->group('Group some tests',function($minisuite){
+$minisuite->group('Group some tests', function($minisuite) {
 
-    $fruits=array('apple','peach','strawberry');
-    $vegetables=array('celery','potato','cabbage','endive','radicchio');
-    $candies=array();
+    $fruits = array('apple', 'peach', 'strawberry');
+    $vegetables = array('celery', 'potato', 'cabbage', 'endive', 'radicchio');
+    $candies = array();
 
     $minisuite->expects('I have 3 fruits in my basket')->that(count($fruits))->equals(3);
     $minisuite->expects('And 5 vegetables')->that(count($vegetables))->equals(5);
@@ -87,8 +87,6 @@ Note that group nesting is supported.
 Expectations
 ------------
 
-On all values :
-
 - isNull() : verify if the value is `null`
 - isNotNull() : verify if the value is not `null`
 - isEmpty() : verify if the value is empty (see the [documentation](http://php.net/manual/en/function.empty.php) for further informations)
@@ -99,8 +97,8 @@ On all values :
 - isLessThanOrEqual(`$value`) : verify if the value is less than or equal the specified parameter
 - isGreaterThan(`$value`) : verify if the value is greater than the specified parameter
 - isGreaterThanOrEqual(`$value`) : verify if the value is greater than or equal the specified parameter
-- isBetween(`$min`,`$max`) : verify if the value is between the specified values (not included)
-- isNotBetween(`$min`,`$max`) : verify if the value is not between the specified values (not included)
+- isBetween(`$min`, `$max`) : verify if the value is between the specified values (not included)
+- isNotBetween(`$min`, `$max`) : verify if the value is not between the specified values (not included)
 - isBoolean() : verify if the value is a boolean
 - isNotBoolean() : verify if the value is not a boolean
 - isInteger() : verify if the value is an integer
