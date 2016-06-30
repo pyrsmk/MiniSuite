@@ -1,9 +1,7 @@
-MiniSuite 3.0.0
+MiniSuite 4.0.0
 ===============
 
 MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive API with a small learning curve.
-
-Support for colors has been added with [colors.php](https://github.com/kevinlebrun/colors.php).
 
 Installing
 ----------
@@ -51,40 +49,6 @@ $minisuite->expects('Verify strawberries stock')
           ->isInteger()
           ->isGreaterThan(0);
 ```
-
-Grouping
---------
-
-For a better test report, it could be a good idea to group your tests.
-
-```php
-$minisuite = new MiniSuite\Suite('My Test Suite');
-
-$minisuite->group('Group some tests', function($minisuite) {
-
-    $fruits = array('apple', 'peach', 'strawberry');
-    $vegetables = array('celery', 'potato', 'cabbage', 'endive', 'radicchio');
-    $candies = array();
-
-    $minisuite->expects('I have 3 fruits in my basket')->that(count($fruits))->equals(3);
-    $minisuite->expects('And 5 vegetables')->that(count($vegetables))->equals(5);
-    $minisuite->expects('And 15 candies')->that(count($candies))->equals(15);
-
-});
-```
-
-Will print :
-
-```
-My Test Suite
-
-    Group some tests
-        Passed : I have 3 fruits in my basket
-        Passed : And 5 vegetables
-        Failed : And 15 candies
-```
-
-Note that group nesting is supported.
 
 Expectations
 ------------
