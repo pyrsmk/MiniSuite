@@ -1,18 +1,19 @@
 <?php
 
-use Symfony\Component\ClassLoader\ClassLoader;
+use Symfony\Component\ClassLoader\Psr4ClassLoader;
 
 ########################################################### Prepare
 
 error_reporting(E_ALL);
 
 require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
-$loader=new ClassLoader;
+$loader = new Psr4ClassLoader;
+$loader->addPrefix('MiniSuite\\', '../src');
 $loader->register();
-$loader->addPrefix('','../src');
 
-$minisuite=new MiniSuite('MiniSuite');
+$minisuite = new MiniSuite\Suite('MiniSuite');
 
 ########################################################### Base
 
@@ -21,6 +22,7 @@ $minisuite->group('Base',function($minisuite){
 	$minisuite->expects('Should pass')->that(true)->equals(true);
 	$minisuite->expects('Should fail')->that(true)->equals(false);
 	$minisuite->expects('Chaining')->that(true)->equals(true)->equals(true);
+	$minisuite->expects('Array printing')->that(array(1 => 1, 'test' => 'test'))->equals(1);
 
 });
 
