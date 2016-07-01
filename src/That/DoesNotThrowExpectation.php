@@ -21,9 +21,6 @@ class DoesNotThrowExpectation extends AbstractExpectation {
 		$error = null;
 		try {
 			call_user_func($value);
-			if($class !== null) {
-				$error = 'should throw an exception';
-			}
 		}
 		catch(\Exception $e){
 			if($class === null) {

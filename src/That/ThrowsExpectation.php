@@ -19,7 +19,7 @@ class ThrowsExpectation extends AbstractExpectation {
 		IsCallableExpectation::check($value);
 		$class = func_num_args() >= 2 ? func_get_arg(1) : null;
 		$error = null;
-		try{
+		try {
 			call_user_func($value);
 			if($class === null) {
 				$error = 'should throw an exception';
