@@ -15,9 +15,9 @@ class IsStringExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(!is_string($value)) {
-			$value = self::format($value);
+			$value = $this->format($value);
 			throw new \Exception("should be a string but instead saw '$value'");
 		}
 	}

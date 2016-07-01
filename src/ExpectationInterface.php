@@ -13,6 +13,6 @@ interface ExpectationInterface {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value);
+	public function check($value);
 
 }

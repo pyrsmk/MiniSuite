@@ -15,7 +15,7 @@ class IsNotBooleanExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(is_bool($value)) {
 			throw new \Exception('is a boolean, but should not');
 		}

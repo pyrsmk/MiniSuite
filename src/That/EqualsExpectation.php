@@ -15,15 +15,20 @@ class EqualsExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(func_num_args() < 2) {
 			throw new \Exception("no value has been passed");
 		}
-		$val = func_get_arg(1);
-		if($value != $val) {
-			$value = self::format($value);
-			$val = self::format($val);
-			throw new \Exception("should equals to '$val' but instead saw '$value'");
+		$value2 = func_get_arg(1);
+		$type1 = gettype($value);
+		$type2 = gettype($value2);
+		if($type1 != $type2) {
+			throw new \Exception("Types mismatch : $type1 vs $type2");
+		}
+		if($value != $value2) {
+			$value = $this->format($value);
+			$value2 = $this->format($value2);
+			throw new \Exception("should equals to '$value2' but instead saw '$value'");
 		}
 	}
 

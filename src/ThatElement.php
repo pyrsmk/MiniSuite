@@ -49,6 +49,7 @@ class ThatElement extends That {
 		}
 		else {
 			try {
+				$class = new $class;
 				array_unshift($arguments, $this->array, $this->index);
 				call_user_func_array(array($class, 'check'), $arguments);
 				$passed = $this->passed;

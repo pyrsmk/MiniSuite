@@ -15,7 +15,7 @@ class IsNotInstanceOfExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		$class = func_get_arg(1);
 		if($value instanceof $class) {
 			throw new \Exception("is an instance of '$class', but should not");

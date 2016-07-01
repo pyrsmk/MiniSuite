@@ -15,7 +15,7 @@ class IsNotEmptyExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(empty($value)) {
 			throw new \Exception('is empty, but should not');
 		}

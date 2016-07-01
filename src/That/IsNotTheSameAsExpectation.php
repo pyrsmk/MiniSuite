@@ -15,13 +15,13 @@ class IsNotTheSameAsExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(func_num_args() < 2) {
 			throw new \Exception('no value has been passed');
 		}
 		$val = func_get_arg(1);
 		if($value === $val) {
-			$val = self::format($val);
+			$val = $this->format($val);
 			throw new \Exception("is the same as '$val' but should not");
 		}
 	}

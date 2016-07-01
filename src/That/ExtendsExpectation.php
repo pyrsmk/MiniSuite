@@ -15,14 +15,15 @@ class ExtendsExpectation extends AbstractExpectation{
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(func_num_args() < 2) {
 			throw new \Exception('no class has been passed');
 		}
-		IsObjectExpectation::check($value);
+		$isObject = new IsObjectExpectation();
+		$isObject->check($value);
 		$class = func_get_arg(1);
 		if(!is_subclass_of($value, $class)) {
-			$class = self::format($class);
+			$class = $this->format($class);
 			throw new \Exception("does not extend '$class'");
 		}
 	}

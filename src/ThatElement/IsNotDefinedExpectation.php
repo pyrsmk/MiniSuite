@@ -15,7 +15,7 @@ class IsNotDefinedExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		$index = func_get_arg(1);
 		if(isset($value[$index])) {
 			throw new \Exception("'$index' is defined but should not be");

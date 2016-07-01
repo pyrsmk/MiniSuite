@@ -15,7 +15,7 @@ class IsNotResourceExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(is_resource($value)) {
 			throw new \Exception('is a resource, but should not');
 		}

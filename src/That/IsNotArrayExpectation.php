@@ -15,7 +15,7 @@ class IsNotArrayExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(is_array($value)) {
 			throw new \Exception('is an array, but should not');
 		}

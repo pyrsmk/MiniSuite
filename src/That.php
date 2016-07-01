@@ -39,17 +39,23 @@ class That {
 			string $method
 			array $arguments
 	*/
-	public function __call($method,$arguments) {
+	public function __call($method, $arguments) {
 		$class = '\MiniSuite\That\\'.ucfirst($method).'Expectation';
-		try {
-			array_unshift($arguments,$this->value);
-			call_user_func_array(array($class, 'check'), $arguments);
-			$passed = $this->passed;
-			$passed();
+		if(!class_exists($class)) {
+			throw new \Exception("unsupported '$method' expectation");
 		}
-		catch(\Exception $e) {
-			$failed = $this->failed;
-			$failed($e->getMessage());
+		else {
+			try {
+				$class = new $class;
+				array_unshift($arguments, $this->value);
+				call_user_func_array(array($class, 'check'), $arguments);
+				$passed = $this->passed;
+				$passed();
+			}
+			catch(\Exception $e) {
+				$failed = $this->failed;
+				$failed($e->getMessage());
+			}
 		}
 		return $this;
 	}

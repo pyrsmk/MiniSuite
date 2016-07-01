@@ -14,16 +14,16 @@ $loader->register();
 
 ########################################################### Base
 
-$minisuite = new MiniSuite\Suite('MiniSuite - Base');
+$minisuite = new MiniSuite\Suite('Base');
 
 $minisuite->expects('Should pass')->that(true)->equals(true);
 $minisuite->expects('Should fail')->that(true)->equals(false);
 $minisuite->expects('Chaining')->that(true)->equals(true)->equals(true);
-$minisuite->expects('Array printing')->that(array(1 => 1, 'test' => 'test'))->equals(1);
+$minisuite->expects('Values printing')->that(array(1 => 1, 'string' => 'test', 'class' => new Stdclass, 'array' => array(1 => 1)))->equals(array());
 
 ########################################################### Expectations
 
-$minisuite = new MiniSuite\Suite('MiniSuite - Expectations');
+$minisuite = new MiniSuite\Suite('Expectations');
 
 interface A {}
 class B implements A {}
@@ -75,3 +75,33 @@ $minisuite->expects('doesNotThrow() [2]')->that(function(){throw new Exception()
 
 $minisuite->expects('isDefined()')->that(array('pwet'=>1),'pwet')->isDefined()->isTheSameAs(1);
 $minisuite->expects('isNotDefined()')->that(array(),0)->isNotDefined();
+
+$minisuite->expects('equals() : types mismatch')
+		  ->that(function() use($minisuite) {
+			  ob_start();
+			  $minisuite->expects('test')->that(new Stdclass)->equals('test');
+			  $contents = ob_get_clean();
+			  if(strpos($contents, '[x]') !== false) {
+				  throw new Exception();
+			  }
+		  })
+		  ->throws();
+
+$minisuite->expects('doesNotEqual() : types mismatch')
+		  ->that(function() use($minisuite) {
+			  ob_start();
+			  $minisuite->expects('test')->that(new Stdclass)->doesNotEqual('test');
+			  $contents = ob_get_clean();
+			  if(strpos($contents, '[x]') !== false) {
+				  throw new Exception();
+			  }
+		  })
+		  ->throws();
+
+$minisuite->expects('Unsupported expectation')
+		  ->that(function() use($minisuite) {
+			  ob_start();
+			  $minisuite->expects('test')->that(0)->bliblablou(0);
+			  ob_end_clean();
+		  })
+		  ->throws();

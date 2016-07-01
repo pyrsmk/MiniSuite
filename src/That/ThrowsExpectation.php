@@ -15,8 +15,9 @@ class ThrowsExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
-		IsCallableExpectation::check($value);
+	public function check($value) {
+		$isCallable = new IsCallableExpectation();
+		$isCallable->check($value);
 		$class = func_num_args() >= 2 ? func_get_arg(1) : null;
 		$error = null;
 		try {
@@ -25,13 +26,13 @@ class ThrowsExpectation extends AbstractExpectation {
 				$error = 'should throw an exception';
 			}
 			else {
-				$class = self::format($class);
+				$class = $this->format($class);
 				$error = "should throw a '$class' exception";
 			}
 		}
 		catch(\Exception $e) {
 			if($class !== null && !($e instanceof $class)) {
-				$class = self::format($class);
+				$class = $this->format($class);
 				$error = "should throw a '$class' exception but instead saw '".get_class($e)."'";
 			}
 		}

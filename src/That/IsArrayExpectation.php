@@ -15,9 +15,9 @@ class IsArrayExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(!is_array($value)) {
-			$value = self::format($value);
+			$value = $this->format($value);
 			throw new \Exception("should be an array but instead saw '$value'");
 		}
 	}

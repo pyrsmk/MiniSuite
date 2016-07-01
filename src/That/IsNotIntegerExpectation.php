@@ -15,7 +15,7 @@ class IsNotIntegerExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(is_int($value)) {
 			throw new \Exception('is an integer, but should not');
 		}

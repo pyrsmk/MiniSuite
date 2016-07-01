@@ -15,9 +15,9 @@ class IsNullExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(!is_null($value)) {
-			$value = self::format($value);
+			$value = $this->format($value);
 			throw new \Exception("expects to be null but is '$value'");
 		}
 	}

@@ -15,7 +15,7 @@ class IsNotObjectExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(is_object($value)) {
 			throw new \Exception('is an object, but should not');
 		}

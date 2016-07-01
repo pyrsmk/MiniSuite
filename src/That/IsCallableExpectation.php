@@ -15,7 +15,7 @@ class IsCallableExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(!is_callable($value)) {
 			throw new \Exception('is not callable');
 		}

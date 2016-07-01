@@ -16,14 +16,14 @@ abstract class AbstractExpectation implements ExpectationInterface {
 		Return
 			String
 	*/
-	static protected function format($value) {
+	protected function format($value) {
 		if(is_object($value)) {
 			return get_class($value);
 		}
 		else if(is_array($value)) {
 			return '['.implode(', ', array_map(
 				function($v, $k) {
-					return sprintf("%s => %s", $k, self::format($v));
+					return sprintf("%s => %s", $k, $this->format($v));
 				},
 				$value,
 				array_keys($value)

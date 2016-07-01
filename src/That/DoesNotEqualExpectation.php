@@ -15,12 +15,18 @@ class DoesNotEqualExpectation extends AbstractExpectation {
 		Parameters
 			mixed $value
 	*/
-	static public function check($value) {
+	public function check($value) {
 		if(func_num_args() < 2) {
 			throw new \Exception('no value has been passed');
 		}
-		if($value == func_get_arg(1)) {
-			$value = self::format($value);
+		$value2 = func_get_arg(1);
+		$type1 = gettype($value);
+		$type2 = gettype($value2);
+		if($type1 != $type2) {
+			throw new \Exception("Types mismatch : $type1 vs $type2");
+		}
+		if($value == $value2) {
+			$value = $this->format($value);
 			throw new \Exception("equals to '$value', but should not");
 		}
 	}
