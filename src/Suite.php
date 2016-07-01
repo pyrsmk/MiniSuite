@@ -34,7 +34,7 @@ class Suite {
 			},
 			function($err) use($message) {
 				echo "    [x] $message\n",
-					 "        $err\n";
+					 "      $err\n";
 			}
 		);
 	}
