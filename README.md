@@ -3,6 +3,8 @@ MiniSuite 4.0.4
 
 MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive API with a small learning curve and a quick deployment. The reports are made to be simple to read.
 
+![A MiniSuite report](https://github.com/pyrsmk/MiniSuite/raw/master/screenshot.jpg)
+
 Installing
 ----------
 
