@@ -75,8 +75,8 @@ $minisuite->expects('Test')
           ->throws();
 ```
 
-The MiniSuite container
------------------------
+The container
+-------------
 
 MiniSuite is based on the [Chernozem container](https://github.com/pyrsmk/Chernozem) and we advise you to read its documentation to be able to use the advanced features, like services support for bigger testing projects.
 
