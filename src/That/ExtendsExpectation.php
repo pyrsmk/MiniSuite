@@ -19,7 +19,7 @@ class ExtendsExpectation extends AbstractExpectation{
 		if(func_num_args() < 2) {
 			throw new \Exception('no class has been passed');
 		}
-		$isObject = new IsObjectExpectation();
+		$isObject = new IsObjectExpectation($this->minisuite);
 		$isObject->check($value);
 		$class = func_get_arg(1);
 		if(!is_subclass_of($value, $class)) {

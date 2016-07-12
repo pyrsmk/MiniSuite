@@ -24,12 +24,12 @@ class ThatElement extends That {
 			Closure $passed
 			Closure $failed
 	*/
-	public function __construct(array $array, $index, Closure $passed, Closure $failed) {
+	public function __construct(array $array, $index, Suite $minisuite, Closure $passed, Closure $failed) {
 		if(isset($array[$index])) {
-			parent::__construct($array[$index], $passed, $failed);
+			parent::__construct($array[$index], $minisuite, $passed, $failed);
 		}
 		else{
-			parent::__construct(null, $passed, $failed);
+			parent::__construct(null, $minisuite, $passed, $failed);
 		}
 		$this->array = $array;
 		$this->index = $index;
@@ -49,7 +49,7 @@ class ThatElement extends That {
 		}
 		else {
 			try {
-				$class = new $class;
+				$class = new $class($this->minisuite);
 				array_unshift($arguments, $this->array, $this->index);
 				call_user_func_array(array($class, 'check'), $arguments);
 				$passed = $this->passed;

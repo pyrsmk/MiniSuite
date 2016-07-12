@@ -10,24 +10,28 @@ use Closure;
 class That {
 	
 	/*
+		mixed $value
+		MiniSuite\Suite $minisuite
 		Closure $passed
 		Closure $failed
-		mixed $value
 	*/
+	protected $value;
+	protected $minisuite;
 	protected $passed;
 	protected $failed;
-	protected $value;
 
 	/*
 		Constructor
 
 		Parameters
 			mixed $value
+			MiniSuite\Suite $minisuite
 			Closure $passed
 			Closure $failed
 	*/
-	public function __construct($value, Closure $passed, Closure $failed) {
+	public function __construct($value, Suite $minisuite, Closure $passed, Closure $failed) {
 		$this->value = $value;
+		$this->minisuite = $minisuite;
 		$this->passed = $passed;
 		$this->failed = $failed;
 	}
@@ -46,7 +50,7 @@ class That {
 		}
 		else {
 			try {
-				$class = new $class;
+				$class = new $class($this->minisuite);
 				array_unshift($arguments, $this->value);
 				call_user_func_array(array($class, 'check'), $arguments);
 				$passed = $this->passed;

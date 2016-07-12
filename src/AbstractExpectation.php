@@ -8,6 +8,21 @@ namespace MiniSuite;
 abstract class AbstractExpectation implements ExpectationInterface {
 
 	/*
+		MiniSuite\Suite $minisuite
+	*/
+	protected $minisuite;
+	
+	/*
+		Constructor
+		
+		Parameters
+			MiniSuite $minisuite
+	*/
+	public function __construct(Suite $minisuite) {
+		$this->minisuite = $minisuite;
+	}
+	
+	/*
 		Format a value to a string
 
 		Parameters

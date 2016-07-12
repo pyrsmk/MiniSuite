@@ -7,6 +7,7 @@ use Symfony\Component\ClassLoader\Psr4ClassLoader;
 error_reporting(E_ALL);
 
 require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $loader = new Psr4ClassLoader;
 $loader->addPrefix('MiniSuite\\', '../src');
@@ -18,8 +19,9 @@ $minisuite = new MiniSuite\Suite('Base');
 
 $minisuite->expects('Should pass')->that(true)->equals(true);
 $minisuite->expects('Should fail')->that(true)->equals(false);
+$minisuite->expects('Extends Chernozem')->that($minisuite instanceOf Chernozem\Container)->equals(true);
 $minisuite->expects('Chaining')->that(true)->equals(true)->equals(true);
-$minisuite->expects('Values printing')->that(array(1 => 1, 'string' => 'test', 'class' => new Stdclass, 'array' => array(1 => 1)))->equals(array());
+$minisuite->expects('Values printing (should fail)')->that(array(1 => 1, 'string' => 'test', 'class' => new Stdclass, 'array' => array(1 => 1)))->equals(array());
 
 ########################################################### Expectations
 
@@ -59,7 +61,7 @@ $minisuite->expects('isNotObject()')->that(array())->isNotObject();
 $minisuite->expects('isResource()')->that(imagecreate(100,100))->isResource();
 $minisuite->expects('isNotResource()')->that(null)->isNotResource();
 
-$minisuite->expects('isCallable()')->that(function(){})->isCallable();
+$minisuite->expects('isCallable()')->that($minisuite->protect(function(){}))->isCallable();
 $minisuite->expects('isNotCallable()')->that(null)->isNotCallable();
 $minisuite->expects('isInstanceOf()')->that(new B)->isInstanceOf('B');
 $minisuite->expects('isNotInstanceOf()')->that(new C)->isNotInstanceOf('B');
@@ -68,40 +70,69 @@ $minisuite->expects('isNotTheSameAs()')->that(1)->isNotTheSameAs('1');
 $minisuite->expects('extends()')->that(new B)->extends('A');
 $minisuite->expects('doesNotExtend()')->that(new C)->doesNotExtend('A');
 
-$minisuite->expects('throws() [1]')->that(function(){throw new Exception();})->throws();
-$minisuite->expects('throws() [2]')->that(function(){throw new Excep();})->throws('Excep');
-$minisuite->expects('doesNotThrow() [1]')->that(function(){})->doesNotThrow();
-$minisuite->expects('doesNotThrow() [2]')->that(function(){throw new Exception();})->doesNotThrow('Excep');
+$minisuite->expects('throws() [1]')->that($minisuite->protect(function($minisuite) {
+	throw new Exception();
+}))->throws();
+
+$minisuite->expects('throws() [2]')->that($minisuite->protect(function($minisuite) {
+	throw new Excep();
+}))->throws('Excep');
+
+$minisuite->expects('doesNotThrow() [1]')->that($minisuite->protect(function($minisuite) {
+	
+}))->doesNotThrow();
+
+$minisuite->expects('doesNotThrow() [3]')->that($minisuite->protect(function($minisuite) {
+	throw new Exception();
+}))->doesNotThrow('Excep');
 
 $minisuite->expects('isDefined()')->that(array('pwet'=>1),'pwet')->isDefined()->isTheSameAs(1);
 $minisuite->expects('isNotDefined()')->that(array(),0)->isNotDefined();
 
 $minisuite->expects('equals() : types mismatch')
-		  ->that(function() use($minisuite) {
+		  ->that($minisuite->protect(function($minisuite) {
 			  ob_start();
 			  $minisuite->expects('test')->that(new Stdclass)->equals('test');
 			  $contents = ob_get_clean();
 			  if(strpos($contents, '[x]') !== false) {
 				  throw new Exception();
 			  }
-		  })
+		  }))
 		  ->throws();
 
 $minisuite->expects('doesNotEqual() : types mismatch')
-		  ->that(function() use($minisuite) {
+		  ->that($minisuite->protect(function($minisuite) {
 			  ob_start();
 			  $minisuite->expects('test')->that(new Stdclass)->doesNotEqual('test');
 			  $contents = ob_get_clean();
 			  if(strpos($contents, '[x]') !== false) {
 				  throw new Exception();
 			  }
-		  })
+		  }))
 		  ->throws();
 
 $minisuite->expects('Unsupported expectation')
-		  ->that(function() use($minisuite) {
+		  ->that($minisuite->protect(function($minisuite) {
 			  ob_start();
 			  $minisuite->expects('test')->that(0)->bliblablou(0);
 			  ob_end_clean();
-		  })
+		  }))
 		  ->throws();
+
+########################################################### Closure support
+
+$minisuite->expects('Closure support')->that(function($minisuite) {
+	return $minisuite;
+})->isInstanceOf('MiniSuite\Suite');
+
+########################################################### Hydrate tests
+
+$minisuite->hydrate(function($minisuite) {
+	$minisuite['test'] = 72;
+});
+
+$minisuite->expects('Hydrate')
+		  ->that(function($minisuite) {
+			  return $minisuite['test'];
+		  })
+		  ->equals(72);

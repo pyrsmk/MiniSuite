@@ -1,7 +1,7 @@
-MiniSuite 4.0.4
+MiniSuite 5.0.0
 ===============
 
-MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive API with a small learning curve and a quick deployment. The reports are made to be simple to read.
+MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive and procedural API. The reports are made to be simple to read.
 
 ![A MiniSuite report](https://github.com/pyrsmk/MiniSuite/raw/master/screenshot.jpg)
 
@@ -14,13 +14,13 @@ Pick up the source or install it with [Composer](https://getcomposer.org/) :
 composer require pyrsmk/minisuite
 ```
 
-Write your tests
-----------------
+Basics
+------
 
 MiniSuite does not need you to create a class for each test you want to run, you can write and organize your code as you want. Please note that all tests are runned when they're called.
 
 ```php
-$fruits = array('apple', 'peach', 'strawberry');
+$fruits = ['apple', 'peach', 'strawberry'];
 
 $minisuite = new MiniSuite\Suite('My tests');
 $minisuite->expects('I have 3 fruits in my basket') // define the expectation message
@@ -43,7 +43,7 @@ $minisuite->expects('Some message')
 Specific tests on array elements are supported too :
 
 ```php
-$fruits = array('apples' => 12, 'peaches' => 7, 'strawberries' => 41);
+$fruits = ['apples' => 12, 'peaches' => 7, 'strawberries' => 41];
 
 $minisuite->expects('Verify strawberries stock')
           ->that($fruits, 'strawberries')
@@ -52,8 +52,74 @@ $minisuite->expects('Verify strawberries stock')
           ->isGreaterThan(0);
 ```
 
-Expectations
-------------
+Closure support
+---------------
+
+MiniSuite support closures to execute more taks when verifying values :
+
+```php
+$minisuite->expects('Test')
+          ->that(function($minisuite) {
+		  	return 72;
+		  })
+          ->equals(72);
+```
+
+Closures are automatically executed when they are passed to `that()`. If you need the closure value to not being run, like with `throws` and `doesNotThrow` expectations, you shoudl protect it with :
+
+```php
+$minisuite->expects('Test')
+          ->that($minisuite->protect(function($minisuite) {
+		  	throws Exception();
+		  }))
+          ->throws();
+```
+
+The MiniSuite container
+-----------------------
+
+MiniSuite is based on the [Chernozem container](https://github.com/pyrsmk/Chernozem) and we advise you to read its documentation to be able to use the advanced features, like services support for bigger testing projects.
+
+You can access to the container by specifying a `Closure` in the `that()` method :
+
+```php
+$minisuite['fruits'] = ['apples' => 12, 'peaches' => 7, 'strawberries' => 41];
+
+$minisuite->expects('Verify strawberries stock')
+          ->that(function($minisuite) {
+		  	return count($minisuite['fruits']['strawberries']) > 0;
+		  })
+          ->equals(true);
+```
+
+Hydrate your tests
+------------------
+
+For cleaner tests, you should hydrate them with your redundant code, like object creation. Each time a test is run, the `hydrate` function is run too, then you can have clean objects for each test.
+
+```php
+$minisuite = new MiniSuite\Suite('My tests');
+
+// Init configuration
+$minisuite['conf'] = [
+	'path' => 'some/path/'
+];
+
+// Set hydrate function
+$minisuite->hydrate(function($minisuite) {
+	$minisuite['logger'] = new SomeLogger($minisuite['conf']);
+});
+
+// Test the logger
+$minisuite->expects('Verify logger path')
+          ->that(function($minisuite) {
+		  	return $minisuite['logger']->getPath();
+		  })
+          ->equals('some/path/');
+```
+
+Available expectations
+----------------------
 
 - isNull() : verify if the value is `null`
 - isNotNull() : verify if the value is not `null`
@@ -89,8 +155,8 @@ Expectations
 - isNotTheSameAs(`$value`) : verify if the value is not the same as the specified value
 - extends(`$class`) : verify if the object extends the specified class
 - doesNotExtend(`$class`) : verify if the object does not extend the specified class
-- throws(`$class`) : if the class parameter is defined, it will verify that the `Closure` (specified with `that()`) throws an exception of the specified class, otherwise it will just verify that an exception has been throwed
-- doesNotThrow(`$class`) : if the class parameter is defined, it will verify that the `Closure` does not throw an exception of the specified class, otherwise it will just verify that no exception has been throwed
+- throws(`$class`) : if the class parameter is defined, it will verify that the protected closure throws an exception of the specified class, otherwise it will just verify that an exception has been throwed
+- doesNotThrow(`$class`) : if the class parameter is defined, it will verify that the protected closure does not throw an exception of the specified class, otherwise it will just verify that no exception has been throwed
 
 Array elements have some more available expectations :
 

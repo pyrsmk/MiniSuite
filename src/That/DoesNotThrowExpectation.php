@@ -16,14 +16,14 @@ class DoesNotThrowExpectation extends AbstractExpectation {
 			mixed $value
 	*/
 	public function check($value) {
-		$isCallable = new IsCallableExpectation();
+		$isCallable = new IsCallableExpectation($this->minisuite);
 		$isCallable->check($value);
 		$class = func_num_args() >= 2 ? func_get_arg(1) : null;
 		$error = null;
 		try {
-			call_user_func($value);
+			$value($this->minisuite);
 		}
-		catch(\Exception $e){
+		catch(\Exception $e) {
 			if($class === null) {
 				$error = 'should not throw an exception';
 			}

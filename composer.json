@@ -1,7 +1,7 @@
 {
 	"name": "pyrsmk/minisuite",
 	"description": "Micro unit testing tool",
-	"keywords": ["micro", "unit", "testing", "test", "debug"],
+	"keywords": ["container", "chernozem", "micro", "unit", "testing", "test", "debug"],
 	"license": "MIT",
 	"authors": [{
 		"name": "Aurélien Delogu",
@@ -9,7 +9,8 @@
 		"homepage": "http://dreamysource.io/project/minisuite"
 	}],
 	"require": {
-		"php": ">=5.4.0"
+		"php": ">=5.4.0",
+		"pyrsmk/chernozem": "^4.1"
 	},
 	"autoload": {
 		"psr-4" : {
