@@ -1,5 +1,5 @@
 {
 	"require": {
-		"symfony/class-loader": "2.7.*@dev"
+        "symfony/class-loader": "^3.1"
 	}
 }
