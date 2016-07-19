@@ -1,7 +1,7 @@
 MiniSuite 5.0.0
 ===============
 
-MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive and procedural API. The reports are made to be simple to read.
+MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive and functional API. The reports are made to be simple to read.
 
 ![A MiniSuite report](https://github.com/pyrsmk/MiniSuite/raw/master/screenshot.jpg)
 
