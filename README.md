@@ -8,8 +8,6 @@ MiniSuite is a very concise and flexible unit testing tool which aims to have an
 Installing
 ----------
 
-Pick up the source or install it with [Composer](https://getcomposer.org/) :
-
 ```
 composer require pyrsmk/minisuite
 ```
@@ -55,23 +53,23 @@ $minisuite->expects('Verify strawberries stock')
 Closure support
 ---------------
 
-MiniSuite support closures to execute more taks when verifying values :
+MiniSuite support closures to execute more tasks when verifying values :
 
 ```php
 $minisuite->expects('Test')
           ->that(function($minisuite) {
-		  	return 72;
-		  })
+		return 72;
+	  })
           ->equals(72);
 ```
 
-Closures are automatically executed when they are passed to `that()`. If you need the closure value to not being run, like with `throws` and `doesNotThrow` expectations, you shoudl protect it with :
+Closures are automatically executed when they are passed to `that()`. If you need the closure value to not being run, like with `throws` and `doesNotThrow` expectations, you should protect it with :
 
 ```php
 $minisuite->expects('Test')
           ->that($minisuite->protect(function($minisuite) {
-		  	throws Exception();
-		  }))
+		throws Exception();
+	  }))
           ->throws();
 ```
 
@@ -87,8 +85,8 @@ $minisuite['fruits'] = ['apples' => 12, 'peaches' => 7, 'strawberries' => 41];
 
 $minisuite->expects('Verify strawberries stock')
           ->that(function($minisuite) {
-		  	return count($minisuite['fruits']['strawberries']) > 0;
-		  })
+		return count($minisuite['fruits']['strawberries']) > 0;
+	  })
           ->equals(true);
 ```
 
@@ -113,8 +111,8 @@ $minisuite->hydrate(function($minisuite) {
 // Test the logger
 $minisuite->expects('Verify logger path')
           ->that(function($minisuite) {
-		  	return $minisuite['logger']->getPath();
-		  })
+		return $minisuite['logger']->getPath();
+	  })
           ->equals('some/path/');
 ```
 
