@@ -51,7 +51,7 @@ class ThatElement extends That {
 			try {
 				$class = new $class($this->minisuite);
 				array_unshift($arguments, $this->array, $this->index);
-				call_user_func_array(array($class, 'check'), $arguments);
+				call_user_func_array([$class, 'check'], $arguments);
 				$passed = $this->passed;
 				$passed();
 			}

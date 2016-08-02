@@ -1,4 +1,4 @@
-MiniSuite 5.0.0
+MiniSuite 5.0.1
 ===============
 
 MiniSuite is a very concise and flexible unit testing tool which aims to have an intuitive and functional API. The reports are made to be simple to read.

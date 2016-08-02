@@ -21,7 +21,7 @@ $minisuite->expects('Should pass')->that(true)->equals(true);
 $minisuite->expects('Should fail')->that(true)->equals(false);
 $minisuite->expects('Extends Chernozem')->that($minisuite instanceOf Chernozem\Container)->equals(true);
 $minisuite->expects('Chaining')->that(true)->equals(true)->equals(true);
-$minisuite->expects('Values printing (should fail)')->that(array(1 => 1, 'string' => 'test', 'class' => new Stdclass, 'array' => array(1 => 1)))->equals(array());
+$minisuite->expects('Values printing (should fail)')->that([1 => 1, 'string' => 'test', 'class' => new Stdclass, 'array' => [1 => 1]])->equals([]);
 
 ########################################################### Expectations
 
@@ -54,10 +54,10 @@ $minisuite->expects('isFloat()')->that(0.2)->isFloat();
 $minisuite->expects('isNotFloat()')->that(1)->isNotFloat();
 $minisuite->expects('isString()')->that('')->isString();
 $minisuite->expects('isNotString()')->that(null)->isNotString();
-$minisuite->expects('isArray()')->that(array())->isArray();
+$minisuite->expects('isArray()')->that([])->isArray();
 $minisuite->expects('isNotArray()')->that(null)->isNotArray();
 $minisuite->expects('isObject()')->that(new Stdclass)->isObject();
-$minisuite->expects('isNotObject()')->that(array())->isNotObject();
+$minisuite->expects('isNotObject()')->that([])->isNotObject();
 $minisuite->expects('isResource()')->that(imagecreate(100,100))->isResource();
 $minisuite->expects('isNotResource()')->that(null)->isNotResource();
 
@@ -86,8 +86,8 @@ $minisuite->expects('doesNotThrow() [3]')->that($minisuite->protect(function($mi
 	throw new Exception();
 }))->doesNotThrow('Excep');
 
-$minisuite->expects('isDefined()')->that(array('pwet'=>1),'pwet')->isDefined()->isTheSameAs(1);
-$minisuite->expects('isNotDefined()')->that(array(),0)->isNotDefined();
+$minisuite->expects('isDefined()')->that(['pwet'=>1],'pwet')->isDefined()->isTheSameAs(1);
+$minisuite->expects('isNotDefined()')->that([],0)->isNotDefined();
 
 $minisuite->expects('equals() : types mismatch')
 		  ->that($minisuite->protect(function($minisuite) {
