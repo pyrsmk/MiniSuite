@@ -58,8 +58,8 @@ MiniSuite support closures to execute more tasks when verifying values :
 ```php
 $minisuite->expects('Test')
           ->that(function($minisuite) {
-			return 72;
-		  })
+              return 72;
+          })
           ->equals(72);
 ```
 
@@ -68,8 +68,8 @@ Closures are automatically executed when they are passed to `that()`. If you nee
 ```php
 $minisuite->expects('Test')
           ->that($minisuite->protect(function($minisuite) {
-			throws Exception();
-		  }))
+              throws Exception();
+          }))
           ->throws();
 ```
 
@@ -85,8 +85,8 @@ $minisuite['fruits'] = ['apples' => 12, 'peaches' => 7, 'strawberries' => 41];
 
 $minisuite->expects('Verify strawberries stock')
           ->that(function($minisuite) {
-			return count($minisuite['fruits']['strawberries']) > 0;
-		  })
+              return count($minisuite['fruits']['strawberries']) > 0;
+          })
           ->equals(true);
 ```
 
@@ -100,19 +100,19 @@ $minisuite = new MiniSuite\Suite('My tests');
 
 // Init configuration
 $minisuite['conf'] = [
-	'path' => 'some/path/'
+    'path' => 'some/path/'
 ];
 
 // Set hydrate function
 $minisuite->hydrate(function($minisuite) {
-	$minisuite['logger'] = new SomeLogger($minisuite['conf']);
+    $minisuite['logger'] = new SomeLogger($minisuite['conf']);
 });
 
 // Test the logger
 $minisuite->expects('Verify logger path')
           ->that(function($minisuite) {
-			return $minisuite['logger']->getPath();
-		  })
+              return $minisuite['logger']->getPath();
+          })
           ->equals('some/path/');
 ```
 
