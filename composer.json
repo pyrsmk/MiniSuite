@@ -1,6 +1,6 @@
 {
     "name": "pyrsmk/minisuite",
-    "description": "Functional micro unit testing framework",
+    "description": "Micro unit testing framework",
     "keywords": ["container", "chernozem", "micro", "unit", "testing", "test", "debug"],
     "license": "MIT",
     "authors": [{
